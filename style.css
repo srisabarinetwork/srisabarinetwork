@@ -1,0 +1,767 @@
+/* Sri Sabari Network - Corporate Dashboard Design System */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Core dark navy theme */
+  --background: hsl(222, 47%, 6%);
+  --foreground: hsl(210, 40%, 96%);
+
+  /* Cards with slightly lighter navy */
+  --card: hsl(222, 44%, 10%);
+  --card-foreground: hsl(210, 40%, 96%);
+
+  /* Primary deep blue */
+  --primary: hsl(217, 91%, 50%);
+  --primary-foreground: hsl(210, 40%, 98%);
+
+  /* Secondary muted navy */
+  --secondary: hsl(222, 47%, 15%);
+  --secondary-foreground: hsl(210, 40%, 96%);
+
+  /* Muted surfaces */
+  --muted: hsl(222, 47%, 12%);
+  --muted-foreground: hsl(215, 20%, 60%);
+
+  /* Accent blue highlight */
+  --accent: hsl(217, 91%, 45%);
+  --accent-foreground: hsl(210, 40%, 98%);
+
+  /* Status colors */
+  --success: hsl(142, 76%, 36%);
+  --pending: hsl(280, 68%, 55%);
+
+  --border: hsl(217, 33%, 20%);
+
+  /* Gradients */
+  --gradient-header: linear-gradient(135deg, hsl(217, 60%, 25%) 0%, hsl(222, 47%, 15%) 100%);
+  --gradient-nav: linear-gradient(180deg, hsl(222, 47%, 8%) 0%, hsl(222, 47%, 6%) 100%);
+  --gradient-card: linear-gradient(145deg, hsl(222, 44%, 11%) 0%, hsl(222, 44%, 9%) 100%);
+
+  /* Shadows */
+  --shadow-card: 0 4px 24px -4px hsla(217, 91%, 50%, 0.15), 0 2px 8px -2px hsla(0, 0%, 0%, 0.3);
+  --shadow-nav: 0 2px 16px hsla(0, 0%, 0%, 0.4);
+  --shadow-hover: 0 8px 32px -4px hsla(217, 91%, 50%, 0.25);
+
+  --radius: 0.75rem;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Layout */
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Navigation */
+.nav-container {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--gradient-nav);
+  box-shadow: var(--shadow-nav);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: opacity 0.2s;
+}
+
+.nav-brand:hover {
+  opacity: 0.8;
+}
+
+.nav-logo {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-foreground);
+  font-weight: bold;
+  font-size: 1.125rem;
+}
+
+.nav-brand-text {
+  color: var(--foreground);
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-link {
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  transition: all 0.2s;
+}
+
+.nav-link:hover {
+  background-color: var(--secondary);
+  color: var(--foreground);
+}
+
+.nav-link.active {
+  background-color: hsla(217, 91%, 50%, 0.2);
+  color: var(--primary);
+}
+
+/* Main Content */
+main {
+  flex: 1;
+  padding: 2rem 0;
+}
+
+/* Footer */
+.footer {
+  margin-top: auto;
+  padding: 1.5rem 0;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  border-top: 1px solid hsla(217, 33%, 20%, 0.5);
+}
+
+/* Dashboard Card */
+.dashboard-card {
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  background: var(--gradient-card);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.dashboard-card:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.dashboard-card.clickable {
+  cursor: pointer;
+}
+
+.dashboard-card.clickable:hover {
+  transform: scale(1.05);
+}
+
+/* Page Title */
+.page-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: var(--foreground);
+}
+
+/* =============== HOME PAGE =============== */
+
+/* LIGHT RAYS EFFECT */
+.light-rays {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.light-rays span {
+  position: absolute;
+  top: -20%;
+  width: 35%;
+  height: 140%;
+  background: linear-gradient(
+    to bottom,
+    rgba(80,160,255,0.45),
+    rgba(80,160,255,0.15),
+    transparent
+  );
+  filter: blur(60px);
+  animation: raysMove 10s linear infinite;
+}
+
+.light-rays span:nth-child(1) {
+  left: 10%;
+  animation-duration: 12s;
+}
+.light-rays span:nth-child(2) {
+  left: 40%;
+  animation-duration: 16s;
+}
+.light-rays span:nth-child(3) {
+  left: 70%;
+  animation-duration: 14s;
+}
+
+@keyframes raysMove {
+  from {
+    transform: translateY(-10%) rotate(3deg);
+  }
+  to {
+    transform: translateY(10%) rotate(-3deg);
+  }
+}
+/* eslint-disable react/no-unknown-property */
+import React, { forwardRef, useMemo, useRef, useLayoutEffect } from 'react';
+import { Canvas, useFrame, useThree, RootState } from '@react-three/fiber';
+import { Color, Mesh, ShaderMaterial } from 'three';
+import { IUniform } from 'three';
+
+type NormalizedRGB = [number, number, number];
+
+const hexToNormalizedRGB = (hex: string): NormalizedRGB => {
+  const clean = hex.replace('#', '');
+  const r = parseInt(clean.slice(0, 2), 16) / 255;
+  const g = parseInt(clean.slice(2, 4), 16) / 255;
+  const b = parseInt(clean.slice(4, 6), 16) / 255;
+  return [r, g, b];
+};
+
+interface UniformValue<T = number | Color> {
+  value: T;
+}
+
+interface SilkUniforms {
+  uSpeed: UniformValue<number>;
+  uScale: UniformValue<number>;
+  uNoiseIntensity: UniformValue<number>;
+  uColor: UniformValue<Color>;
+  uRotation: UniformValue<number>;
+  uTime: UniformValue<number>;
+  [uniform: string]: IUniform;
+}
+
+const vertexShader = `
+varying vec2 vUv;
+varying vec3 vPosition;
+
+void main() {
+  vPosition = position;
+  vUv = uv;
+  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+}
+`;
+
+const fragmentShader = `
+varying vec2 vUv;
+varying vec3 vPosition;
+
+uniform float uTime;
+uniform vec3  uColor;
+uniform float uSpeed;
+uniform float uScale;
+uniform float uRotation;
+uniform float uNoiseIntensity;
+
+const float e = 2.71828182845904523536;
+
+float noise(vec2 texCoord) {
+  float G = e;
+  vec2  r = (G * sin(G * texCoord));
+  return fract(r.x * r.y * (1.0 + texCoord.x));
+}
+
+vec2 rotateUvs(vec2 uv, float angle) {
+  float c = cos(angle);
+  float s = sin(angle);
+  mat2  rot = mat2(c, -s, s, c);
+  return rot * uv;
+}
+
+void main() {
+  float rnd        = noise(gl_FragCoord.xy);
+  vec2  uv         = rotateUvs(vUv * uScale, uRotation);
+  vec2  tex        = uv * uScale;
+  float tOffset    = uSpeed * uTime;
+
+  tex.y += 0.03 * sin(8.0 * tex.x - tOffset);
+
+  float pattern = 0.6 +
+                  0.4 * sin(5.0 * (tex.x + tex.y +
+                                   cos(3.0 * tex.x + 5.0 * tex.y) +
+                                   0.02 * tOffset) +
+                           sin(20.0 * (tex.x + tex.y - 0.1 * tOffset)));
+
+  vec4 col = vec4(uColor, 1.0) * vec4(pattern) - rnd / 15.0 * uNoiseIntensity;
+  col.a = 1.0;
+  gl_FragColor = col;
+}
+`;
+
+interface SilkPlaneProps {
+  uniforms: SilkUniforms;
+}
+
+const SilkPlane = forwardRef<Mesh, SilkPlaneProps>(function SilkPlane({ uniforms }, ref) {
+  const { viewport } = useThree();
+
+  useLayoutEffect(() => {
+    const mesh = ref as React.MutableRefObject<Mesh | null>;
+    if (mesh.current) {
+      mesh.current.scale.set(viewport.width, viewport.height, 1);
+    }
+  }, [ref, viewport]);
+
+  useFrame((_state: RootState, delta: number) => {
+    const mesh = ref as React.MutableRefObject<Mesh | null>;
+    if (mesh.current) {
+      const material = mesh.current.material as ShaderMaterial & {
+        uniforms: SilkUniforms;
+      };
+      material.uniforms.uTime.value += 0.1 * delta;
+    }
+  });
+
+  return (
+    <mesh ref={ref}>
+      <planeGeometry args={[1, 1, 1, 1]} />
+      <shaderMaterial uniforms={uniforms} vertexShader={vertexShader} fragmentShader={fragmentShader} />
+    </mesh>
+  );
+});
+SilkPlane.displayName = 'SilkPlane';
+
+export interface SilkProps {
+  speed?: number;
+  scale?: number;
+  color?: string;
+  noiseIntensity?: number;
+  rotation?: number;
+}
+
+const Silk: React.FC<SilkProps> = ({ speed = 5, scale = 1, color = '#7B7481', noiseIntensity = 1.5, rotation = 0 }) => {
+  const meshRef = useRef<Mesh>(null);
+
+  const uniforms = useMemo<SilkUniforms>(
+    () => ({
+      uSpeed: { value: speed },
+      uScale: { value: scale },
+      uNoiseIntensity: { value: noiseIntensity },
+      uColor: { value: new Color(...hexToNormalizedRGB(color)) },
+      uRotation: { value: rotation },
+      uTime: { value: 0 }
+    }),
+    [speed, scale, noiseIntensity, color, rotation]
+  );
+
+  return (
+    <Canvas dpr={[1, 2]} frameloop="always">
+      <SilkPlane ref={meshRef} uniforms={uniforms} />
+    </Canvas>
+  );
+};
+
+export default Silk;
+
+.hero-section {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.2;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom right, 
+    hsla(222, 47%, 6%, 0.8), 
+    hsla(222, 47%, 6%, 0.6), 
+    hsla(217, 91%, 50%, 0.2));
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(to right, var(--primary), var(--accent), var(--primary));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.hero-tagline {
+  font-size: 1.25rem;
+  color: var(--muted-foreground);
+  margin-bottom: 2rem;
+}
+
+.hero-decorative {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.hero-line {
+  width: 4rem;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--primary));
+}
+
+.hero-line.reverse {
+  background: linear-gradient(to left, transparent, var(--primary));
+}
+
+.hero-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background-color: var(--primary);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.stats-grid {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.stat-card {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  color: var(--muted-foreground);
+}
+
+/* =============== MEMBERS PAGE =============== */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table thead {
+  background: var(--gradient-header);
+}
+
+.data-table th {
+  padding: 1rem 1.5rem;
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--primary-foreground);
+  border-bottom: 2px solid hsla(217, 91%, 50%, 0.3);
+}
+
+.data-table th:first-child {
+  border-top-left-radius: 0.5rem;
+}
+
+.data-table th:last-child {
+  border-top-right-radius: 0.5rem;
+}
+
+.data-table td {
+  padding: 1rem 1.5rem;
+  font-size: 0.875rem;
+  color: var(--foreground);
+  border-bottom: 1px solid hsla(217, 33%, 20%, 0.5);
+}
+
+.data-table tbody tr {
+  transition: background-color 0.2s;
+}
+
+.data-table tbody tr:hover {
+  background-color: hsl(222, 47%, 14%);
+}
+
+.member-id {
+  font-family: monospace;
+  color: var(--primary);
+}
+
+.member-name {
+  font-weight: 500;
+}
+
+.member-role {
+  color: var(--muted-foreground);
+}
+
+/* =============== contact PAGE =============== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.info-card {
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  background-color: var(--secondary);
+  border-left: 4px solid var(--primary);
+  transition: all 0.2s;
+}
+
+.info-card:hover {
+  transform: translateX(0.25rem);
+  border-left-color: var(--accent);
+}
+
+.info-card-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.info-icon {
+  font-size: 1.5rem;
+}
+
+.info-label {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  margin-bottom: 0.25rem;
+}
+
+.info-value {
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.office-hours {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  background-color: hsla(222, 47%, 15%, 0.5);
+  border: 1px solid var(--border);
+}
+
+.office-hours h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--foreground);
+}
+
+.office-hours p {
+  color: var(--muted-foreground);
+}
+
+/* =============== CHECK-UP PAGE =============== */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.member-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.member-table th,
+.member-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.member-table th {
+  color: #c7d2fe;
+  font-weight: 600;
+}
+
+.status {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status.given {
+  background: #16a34a;
+  color: #ffffff;
+}
+
+.checkup-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.checkup-item h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.status-active {
+  background-color: hsla(142, 76%, 36%, 0.15);
+  color: var(--success);
+  border: 1px solid hsla(142, 76%, 36%, 0.3);
+}
+
+.status-pending {
+  background-color: hsla(280, 68%, 55%, 0.15);
+  color: var(--pending);
+  border: 1px solid hsla(280, 68%, 55%, 0.3);
+}
+
+/* =============== ANIMATIONS =============== */
+@keyframes shimmer {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+.animate-fade-in {
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.animate-delay-1 {
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.3s forwards;
+}
+
+.animate-delay-2 {
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.5s forwards;
+}
+
+.animate-delay-3 {
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.7s forwards;
+}
+
+/* =============== RESPONSIVE =============== */
+@media (max-width: 768px) {
+  .nav-brand-text {
+    display: none;
+  }
+
+  .nav-link {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-tagline {
+    font-size: 1rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .checkup-grid {
+    grid-template-columns: 1fr;
+  }
+}
